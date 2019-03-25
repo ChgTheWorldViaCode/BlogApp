@@ -7,15 +7,12 @@
     <title>My Blog</title>
 </head>
 <body>
-    <h1><a href="">Blog</a></h1>
-
-    {% for post in posts %}
+    {% if post.published_date %} 
         <div>
-            <p>Published: {{ post.published_date}}</p>
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text | linebreaksbr }}</p>
+            {{ post.published_date }}
         </div>
-    {% endfor %} 
-
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text | linebreaksbr }}</p>       
 </body>
 </html>
