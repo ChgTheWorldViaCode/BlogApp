@@ -15,7 +15,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html',stuff_for_frontend) 
 
 def post_new(request):
-    if request == 'POST':
+    if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)    
@@ -25,5 +25,23 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:    
         form = PostForm()
+        stuff_for_frontend = {'form': form}
+        return render(request,'blog/post_edit.html',stuff_for_frontend)
+
+def post_edit(request, pk):
+    # Get DB record from Post model via Primay Key
+    post = get_object_or_404(Post,pk=pk)
+    if request.method == 'POST':
+        #Updating an Existing Form (for existing post)
+        form = PostForm(request.POST,instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now() 
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        #Updating an Existing Form (for existing post)
+        form = PostForm(instance=post)
         stuff_for_frontend = {'form': form}
         return render(request,'blog/post_edit.html',stuff_for_frontend)
