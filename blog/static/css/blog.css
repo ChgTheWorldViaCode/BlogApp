@@ -10,6 +10,13 @@
     text-decoration: none;
 }
 
+.top-menu {
+    float: right;
+    margin-right: 20px;
+    font-size: 26pt;
+    color: white;
+}
+
 .content {
     margin-left: 40px;
 }
