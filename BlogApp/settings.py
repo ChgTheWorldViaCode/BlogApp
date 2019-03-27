@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# On Login redirect to home page instead of default URL /login/profile page
+LOGIN_REDIRECT_URL = 'post_list'
 
 # Application definition
 
