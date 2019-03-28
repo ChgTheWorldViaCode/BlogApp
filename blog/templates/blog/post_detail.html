@@ -23,6 +23,7 @@
     <hr>
     <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-secondary">Add Comment</a>
     <!--Use related_name "comments" to get all comments-->
+    <!--Post.objects.get(pk=1).comments.all()-->
     {% for comment in post.comments.all %}
 
         <div class="comment">

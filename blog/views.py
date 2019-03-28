@@ -65,11 +65,12 @@ def add_comment_to_post(request, pk):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)    
+            comment = form.save(commit=False) 
+            comment.post = post   
             comment.author = request.user
             comment.save()
             return redirect('post_detail', pk=post.pk)
     else:    
         form = CommentForm()
         stuff_for_frontend = {'form': form, 'post': post}
-        return render(request,'add_comment_to_post.html',stuff_for_frontend)
+        return render(request,'blog/add_comment_to_post.html',stuff_for_frontend)
