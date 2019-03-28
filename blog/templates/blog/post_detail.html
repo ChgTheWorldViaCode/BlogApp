@@ -19,4 +19,22 @@
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|truncatechars:50|linebreaksbr }}</p> 
     </div>  
+
+    <hr>
+    <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-secondary">Add Comment</a>
+    <!--Use related_name "comments" to get all comments-->
+    {% for comment in post.comments.all %}
+
+        <div class="comment">
+            <div class="date">
+                <p>Created: {{ comment.created_date }}</p>
+            </div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text }}</p>
+        </div>
+
+        {% empty %}
+            <p>0 Comments</p>
+    {% endfor%}
+
 {% endblock %}
