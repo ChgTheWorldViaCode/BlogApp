@@ -18,6 +18,7 @@
     {% if user.is_authenticated %} 
         <a class="top-menu" href="{% url 'post_draft_list' %}"><i class="fab fa-firstdraft"></i></a>   
         <a class="top-menu" href="{% url 'post_new' %}"><i class="fas fa-plus"></i></a> 
+        <p class="top-menu">Hello, {{user.username}} <small><a href="{% url 'logout' %}"><i class="far fa-user-circle"></i></a></small></p>
     {% else %}    
         <a class="top-menu" href="{% url 'login' %}"><i class="fas fa-user-circle"></i></a>
     {% endif %}    
