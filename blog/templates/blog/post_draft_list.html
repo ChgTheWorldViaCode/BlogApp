@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load markdownify %}
 
 {% block title%}My Draft Blog{% endblock %}
 
@@ -9,7 +10,8 @@
                 <p>Created: {{ post.date_created}}</p>
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|truncatechars:50|linebreaksbr }}</p>
+            <!--truncatechars:50 option interferred with markdown, syntax, highlight -->
+            <p>{{ post.text|markdown|safe|linebreaksbr }}</p>
         </div>
     {% endfor %} 
 {% endblock %}
