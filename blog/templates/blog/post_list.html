@@ -11,7 +11,12 @@
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             <p>{{ post.text |markdown|safe|linebreaksbr }}</p>
-            <a href="{% url 'post_detail' pk=post.pk %}">{{ post.approved_comments.count }} Comments</a>
+            <a href="{% url 'post_detail' pk=post.pk %}">{{ post.approved_comments.count }} Comments
+                {% if user.is_superuser %}
+                   , {{ post.unapproved_comments.count }} Pending
+                {% endif %}
+            </a>
+            <hr>
         </div>
     {% endfor %} 
 {% endblock %}

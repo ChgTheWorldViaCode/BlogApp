@@ -16,6 +16,9 @@ class Post(models.Model):
     def approved_comments(self):
         return self.comments.filter(approved=True)
 
+    def unapproved_comments(self):
+        return self.comments.filter(approved=False)
+        
     # create string representation
     def __str__(self):
         return self.title  
